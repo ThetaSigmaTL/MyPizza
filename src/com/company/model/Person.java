@@ -16,10 +16,12 @@ public abstract class Person {
 
     }
 
-    public static int generateId(){
-        int min = 0;
-        int max = 1000000000;
-        return (int) Math.floor(Math.random()*(max-min+1)+min);
-
+    public int getId() {
+        return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 }

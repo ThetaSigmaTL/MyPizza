@@ -1,5 +1,7 @@
 package com.company.model;
 
+import com.company.model.enums.AccountStatus;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
@@ -11,7 +13,9 @@ public class Account {
     private BigDecimal balance;
     private AccountStatus status;
 
-    public Account(BigInteger account, String customerName,String customerLastname,int customerID, BigDecimal balance, AccountStatus status) {
+    public Account(BigInteger account, String customerName,String customerLastname,int customerID,
+                   BigDecimal balance, AccountStatus status) {
+
         this.account = account;
         this.customerName= customerName;
         this.customerLastname = customerLastname;

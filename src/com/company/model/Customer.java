@@ -11,6 +11,7 @@ public class Customer extends Person{
    private final String lastName;
    private final int id;
    private final Account account;
+   private static int CustomerCount = 0;
 
     public Customer(String name,String lastName, int id, Account account) {
         super();
@@ -36,7 +37,11 @@ public class Customer extends Person{
         return account;
     }
 
+    public int generateCustomerID(){
 
+        return CustomerCount++;
+
+    }
 
 
 }
