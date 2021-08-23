@@ -1,20 +1,34 @@
 package com.company.model;
 
-public class Employee {
-    private final String name;
-    private final int id;
+import com.company.model.enums.Position;
 
-    public Employee(String name, int id) {
-        this.name = name;
-        this.id = id;
+import java.math.BigDecimal;
+
+public class Employee extends Person {
+    private String firstName;
+    private String lastName;
+    private String id;
+    BigDecimal salary;
+    private Position position;
+
+    public Employee(String firstName, String lastName, String id, BigDecimal salary, Position position) {
+        super(firstName, lastName, id);
+        this.salary = salary;
+        this.position = position;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public int getId() {
+    @Override
+    public String getId() {
         return id;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 }
 

@@ -4,54 +4,53 @@ import com.company.model.enums.AccountStatus;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class Account {
-    private final BigInteger account;
-    private final int customerID;
-    private final String customerName;
-    private final String customerLastname;
-    private BigDecimal balance;
+    private final String accountNum;
+    private  Customer customer;
+    private BigDecimal balance = new BigDecimal("0");
     private AccountStatus status;
+    private List<Transaction> transactionsList = new ArrayList<>();
 
-    public Account(BigInteger account, String customerName,String customerLastname,int customerID,
-                   BigDecimal balance, AccountStatus status) {
+    public Account(String accountNum, BigDecimal balance, AccountStatus status, Customer customer) {
 
-        this.account = account;
-        this.customerName= customerName;
-        this.customerLastname = customerLastname;
-        this.customerID = customerID;
+        this.accountNum = accountNum;
         this.balance = balance;
         this.status = status;
+        this.customer = customer;
     }
 
-    public void deposit (BigDecimal deposit){
-        this.balance.add(deposit);
+    public boolean deposit (BigDecimal deposit){
+
+        return (status != AccountStatus.Blocked) && (status != AccountStatus.Inactive);
+
     }
 
-    public void withdraw (BigDecimal withdraw )
+    public boolean withdraw (BigDecimal withdraw )
     {
-        this.balance.subtract(withdraw);
+        if (balance.compareTo(withdraw) == -1) {
+            return false;
+        }
+
+        else return (status != AccountStatus.Blocked) && (status != AccountStatus.Inactive);
     }
 
     public BigDecimal getBalance() {
+
         return balance;
+
     }
 
-    public BigInteger getAccount() {
-        return account;
+    public String getAccount() {
+
+
+        return accountNum;
+
     }
 
-    public int getCustomerID() {
-        return customerID;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public String getCustomerLastname() {
-        return customerLastname;
-    }
 
     public AccountStatus getStatus() {
         return status;
@@ -59,5 +58,19 @@ public class Account {
 
     public void setStatus(AccountStatus status) {
         this.status = status;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Account account = (Account) o;
+        return accountNum.equals(account.accountNum) && customer.equals(account.customer) && balance.equals(account.balance)
+                && status == account.status;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(accountNum, customer, balance, status);
     }
 }

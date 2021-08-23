@@ -1,45 +1,39 @@
 package com.company.model;
 
-import com.company.repository.BankDataSourceImpl;
-
-import java.math.BigInteger;
 import java.util.List;
+import java.util.Objects;
 
 public class Customer extends Person{
 
-   private final String name;
-   private final String lastName;
-   private final int id;
-   private final Account account;
-   private static int CustomerCount = 0;
+   private  String firstName;
+   private String lastName;
+   private String id;
+   private String passID;
+   private final List<Account> accounts;
 
-    public Customer(String name,String lastName, int id, Account account) {
-        super();
-        this.name = name;
-        this.lastName = lastName;
-        this.id = id;
-        this.account = account;
+    public Customer(String firstName,String lastName, String id, List<Account> accounts, String passID) {
+        super(firstName, lastName, id);
+        this.accounts = accounts;
+        this.passID = passID;
     }
 
-    public int getId() {
-        return id;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return firstName.equals(customer.firstName) && lastName.equals(customer.lastName) && id.equals(customer.id)
+                && passID.equals(customer.passID) && accounts.equals(customer.accounts);
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, id, passID, accounts);
     }
 
-    public String getLastName() {
-        return lastName;
-    }
+    public List<Account> getAccounts() {
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public int generateCustomerID(){
-
-        return CustomerCount++;
+        return accounts;
 
     }
 
