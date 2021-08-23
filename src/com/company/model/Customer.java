@@ -3,6 +3,10 @@ package com.company.model;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Класс клиента
+ * @author ThetaSigma 22.08.2021
+ */
 public class Customer extends Person{
 
    private  String firstName;

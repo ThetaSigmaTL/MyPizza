@@ -2,6 +2,9 @@ package com.company.model;
 
 import java.util.Random;
 
+/**
+ * Класс для генерации номера счета
+ */
 public class AccountNumGenerator {
 
     public static String accountNum(){

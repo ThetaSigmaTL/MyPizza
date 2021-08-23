@@ -5,16 +5,17 @@ import com.company.model.Customer;
 import com.company.model.Employee;
 import com.company.model.Transaction;
 
+import javax.sql.DataSource;
 import java.util.List;
 
 /**
  * Интерфейс для обработки счетов клиентов
- * @author ThetaSigma
- * @since 22.08.2021
+ * @author ThetaSigma 22.08.2021
  */
 
 public interface AccountRep {
 
+    void writeAccToFile(List <Account> accounts);
 
     /**
      * @return  возвращает банковский счет по его номеру

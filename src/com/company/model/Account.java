@@ -3,14 +3,17 @@ package com.company.model;
 import com.company.model.enums.AccountStatus;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Класс счета клиента клиента
+ * @author ThetaSigma 22.08.2021
+ */
 public class Account {
     private final String accountNum;
-    private  Customer customer;
+    private final Customer customer;
     private BigDecimal balance = new BigDecimal("0");
     private AccountStatus status;
     private List<Transaction> transactionsList = new ArrayList<>();

@@ -3,7 +3,12 @@ package com.company.model;
 import com.company.model.enums.TransactionType;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
+/**
+ * Класс транзакции
+ * @author ThetaSigma 22.08.2021
+ */
 public class Transaction {
 
     private final int transactionID;
@@ -38,5 +43,19 @@ public class Transaction {
 
     public TransactionType getTransactionType() {
         return transactionType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transaction that = (Transaction) o;
+        return transactionID == that.transactionID && payeeID == that.payeeID && senderID == that.senderID &&
+                sum.equals(that.sum) && transactionType == that.transactionType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(transactionID, payeeID, senderID, sum, transactionType);
     }
 }

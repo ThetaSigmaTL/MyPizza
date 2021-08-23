@@ -3,6 +3,7 @@ package com.company.model.enums;
 
 /**
  * Перечисление типов транзакций
+ * @author ThetaSigma 22.08.2021
  */
 public enum TransactionType {
 

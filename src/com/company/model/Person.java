@@ -1,5 +1,9 @@
 package com.company.model;
 
+/**
+ * Абстрактный класс человека
+ * @author ThetaSigma 22.08.2021
+ */
 public abstract class Person {
 
     private String firstName;
@@ -15,7 +19,6 @@ public abstract class Person {
     public Person() {
 
     }
-
 
     public String getLastname() {
         return lastName;
