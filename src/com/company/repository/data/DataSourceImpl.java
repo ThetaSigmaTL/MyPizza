@@ -7,6 +7,7 @@ import com.company.model.Transaction;
 import java.util.List;
 
 public class DataSourceImpl implements DataSource {
+    private final Storage storage;
     @Override
     public List<Account> getAccounts() {
         return null;
@@ -20,5 +21,9 @@ public class DataSourceImpl implements DataSource {
     @Override
     public List<Transaction> getTransactions() {
         return null;
+    }
+
+    public DataSourceImpl(Storage storage) {
+        this.storage = storage;
     }
 }

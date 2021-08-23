@@ -9,7 +9,7 @@ import java.util.Objects;
  */
 public class Customer extends Person{
 
-   private  String firstName;
+   private String firstName;
    private String lastName;
    private String id;
    private String passID;

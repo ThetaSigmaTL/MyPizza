@@ -20,11 +20,11 @@ public enum Position {
     /**
      * Служба безопасности
      */
-    Security_Service,
+    SecurityService,
 
     /**
      * Топ-менеджмент
      */
-    Top_Management
+    TopManagement
 
 }

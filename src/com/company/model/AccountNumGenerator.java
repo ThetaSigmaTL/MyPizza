@@ -1,5 +1,6 @@
 package com.company.model;
 
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -8,6 +9,8 @@ import java.util.Random;
 public class AccountNumGenerator {
 
     public static String accountNum(){
+        Date date = new Date();
+        date.getTime();
         String privatePersonAccountNum = "408178";
         String accountNumBlockTwo;
         String accountNumBlockThree;

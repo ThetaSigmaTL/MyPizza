@@ -14,44 +14,40 @@ import java.util.Objects;
 public class Account {
     private final String accountNum;
     private final Customer customer;
-    private BigDecimal balance = new BigDecimal("0");
+    private final BigDecimal balance;
     private AccountStatus status;
-    private List<Transaction> transactionsList = new ArrayList<>();
+    private final List<Transaction> transactionsList = new ArrayList<>();
 
     public Account(String accountNum, BigDecimal balance, AccountStatus status, Customer customer) {
-
         this.accountNum = accountNum;
         this.balance = balance;
         this.status = status;
         this.customer = customer;
     }
 
-    public boolean deposit (BigDecimal deposit){
-
+    public boolean checkStatus(BigDecimal deposit){
         return (status != AccountStatus.Blocked) && (status != AccountStatus.Inactive);
-
     }
 
-    public boolean withdraw (BigDecimal withdraw )
-    {
-        if (balance.compareTo(withdraw) == -1) {
-            return false;
+    public void addBalance(BigDecimal deposit){
+        if (deposit != null){
+            balance.add(deposit);
         }
+    }
 
-        else return (status != AccountStatus.Blocked) && (status != AccountStatus.Inactive);
+    public void subBalance(BigDecimal withdraw) {
+        if (withdraw != null){
+            balance.subtract(withdraw);
+        }
     }
 
     public BigDecimal getBalance() {
-
         return balance;
-
     }
 
     public String getAccount() {
 
-
         return accountNum;
-
     }
 
 
