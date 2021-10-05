@@ -18,7 +18,6 @@ public class AccountNumGenerator {
         accountNumBlockTwo= random.longs(0,9999999).toString();
         accountNumBlockThree = random.longs(0,9999999).toString();
         return privatePersonAccountNum + accountNumBlockTwo + accountNumBlockThree;
-
     }
 
 

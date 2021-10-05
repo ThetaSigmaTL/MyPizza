@@ -13,11 +13,10 @@ public class Customer extends Person{
    private String lastName;
    private String id;
    private String passID;
-   private final List<Account> accounts;
+   private List<Account> accounts;
 
-    public Customer(String firstName,String lastName, String id, List<Account> accounts, String passID) {
+    public Customer(String firstName,String lastName, String id, String passID) {
         super(firstName, lastName, id);
-        this.accounts = accounts;
         this.passID = passID;
     }
 

@@ -8,21 +8,21 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Класс счета клиента клиента
+ * Класс счета клиента
  * @author ThetaSigma 22.08.2021
  */
 public class Account {
     private final String accountNum;
-    private final Customer customer;
+    private final String customerId;
     private final BigDecimal balance;
     private AccountStatus status;
     private final List<Transaction> transactionsList = new ArrayList<>();
 
-    public Account(String accountNum, BigDecimal balance, AccountStatus status, Customer customer) {
+    public Account(String accountNum, BigDecimal balance, AccountStatus status, String customerId) {
         this.accountNum = accountNum;
         this.balance = balance;
         this.status = status;
-        this.customer = customer;
+        this.customerId = customerId;
     }
 
     public boolean checkStatus(BigDecimal deposit){
@@ -64,12 +64,12 @@ public class Account {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return accountNum.equals(account.accountNum) && customer.equals(account.customer) && balance.equals(account.balance)
+        return accountNum.equals(account.accountNum) && customerId.equals(account.customerId) && balance.equals(account.balance)
                 && status == account.status;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountNum, customer, balance, status);
+        return Objects.hash(accountNum, customerId, balance, status);
     }
 }

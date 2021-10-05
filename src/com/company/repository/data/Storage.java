@@ -8,11 +8,11 @@ import com.company.model.Transaction;
 import java.util.List;
 
 public interface Storage {
-    public List<Account> readAccountsFile();
+    public List<String> readAccountsFile();
 
-    public List<Customer> readCustomersFile();
+    public List<String> readCustomersFile();
 
-    public List<Transaction> readTransactionsFile();
+    public List<String> readTransactionsFile();
 
-    public List<Employee> readEmployeesFile();
+    public List<String> readEmployeesFile();
 }
