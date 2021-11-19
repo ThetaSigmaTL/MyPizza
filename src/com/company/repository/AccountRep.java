@@ -1,11 +1,6 @@
 package com.company.repository;
 
 import com.company.model.Account;
-import com.company.model.Customer;
-import com.company.model.Employee;
-import com.company.model.Transaction;
-
-import javax.sql.DataSource;
 import java.util.List;
 
 /**

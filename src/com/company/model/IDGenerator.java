@@ -1,5 +1,6 @@
 package com.company.model;
 
+import java.math.BigInteger;
 import java.util.UUID;
 
 /**
@@ -9,7 +10,8 @@ import java.util.UUID;
 public class IDGenerator {
 
    public String generateID(){
-       return UUID.randomUUID().toString();
+               String id = String.format("040d", new BigInteger(UUID.randomUUID().toString().replace("-",""),16));
+               return id;
    }
 
 

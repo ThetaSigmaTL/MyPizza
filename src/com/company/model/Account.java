@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Класс счета клиента
+ * Класс счета  клиента
  * @author ThetaSigma 22.08.2021
  */
 public class Account {
