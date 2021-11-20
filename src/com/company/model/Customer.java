@@ -7,17 +7,20 @@ import java.util.Objects;
  * Класс клиента
  * @author ThetaSigma 22.08.2021
  */
-public class Customer extends Person{
+public class Customer {
 
-   private String firstName;
-   private String lastName;
-   private String id;
-   private String passID;
+   private final String firstName;
+   private final String lastName;
+   private final String id;
+   private final String passID;
    private List<Account> accounts;
 
     public Customer(String firstName,String lastName, String id, String passID) {
-        super(firstName, lastName, id);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.id = id;
         this.passID = passID;
+
     }
 
     @Override

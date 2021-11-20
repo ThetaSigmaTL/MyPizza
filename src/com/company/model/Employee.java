@@ -9,31 +9,23 @@ import java.util.Objects;
  * Класс сотрудника
  * @author ThetaSigma 22.08.2021
  */
-public class Employee extends Person {
-    private String firstName;
-    private String lastName;
-    private String id;
-    BigDecimal salary;
-    private Position position;
+public class Employee  {
+    private final String firstName;
+    private final String lastName;
+    private final String id;
+    private final BigDecimal salary;
+    private final Position position;
 
     public Employee(String firstName, String lastName, String id, BigDecimal salary, Position position) {
-        super(firstName, lastName, id);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.id = id;
         this.salary = salary;
         this.position = position;
     }
 
-
-    @Override
-    public String getId() {
-        return id;
-    }
-
     public Position getPosition() {
         return position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
     }
 
     @Override
