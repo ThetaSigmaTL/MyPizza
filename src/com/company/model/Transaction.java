@@ -3,6 +3,8 @@ package com.company.model;
 import com.company.model.enums.TransactionType;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -16,13 +18,15 @@ public class Transaction {
     private final int senderID;
     private final BigDecimal sum;
     private final TransactionType transactionType;
+    private final Timestamp timestamp;
 
-    public Transaction(int transactionID, int payeeID, int senderID, BigDecimal sum, TransactionType transactionType) {
+    public Transaction(int transactionID, int payeeID, int senderID, BigDecimal sum, TransactionType transactionType, Timestamp timestamp) {
         this.transactionID = transactionID;
         this.payeeID = payeeID;
         this.senderID = senderID;
         this.sum = sum;
         this.transactionType = transactionType;
+        this.timestamp = timestamp;
     }
 
     public int getTransactionID() {

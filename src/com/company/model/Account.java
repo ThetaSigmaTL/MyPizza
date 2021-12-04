@@ -18,6 +18,7 @@ public class Account {
     private AccountStatus status;
     private final List<Transaction> transactionsList = new ArrayList<>();
 
+
     public Account(String accountNum, BigDecimal balance, AccountStatus status, String customerId) {
         this.accountNum = accountNum;
         this.balance = balance;
@@ -27,6 +28,10 @@ public class Account {
 
     public boolean checkStatus(BigDecimal deposit){
         return (status != AccountStatus.Blocked) && (status != AccountStatus.Inactive);
+    }
+
+    public String getCustomerId() {
+        return customerId;
     }
 
     public void addBalance(BigDecimal deposit){
@@ -41,13 +46,12 @@ public class Account {
         }
     }
 
-    public BigDecimal getBalance() {
-        return balance;
+    public String getAccountNum() {
+        return accountNum;
     }
 
-    public String getAccount() {
-
-        return accountNum;
+    public BigDecimal getBalance() {
+        return balance;
     }
 
 
