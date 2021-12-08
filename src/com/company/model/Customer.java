@@ -23,6 +23,22 @@ public class Customer {
 
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getPassID() {
+        return passID;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

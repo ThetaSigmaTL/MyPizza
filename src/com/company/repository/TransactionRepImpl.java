@@ -1,5 +1,6 @@
 package com.company.repository;
 
+import com.company.model.Employee;
 import com.company.model.Transaction;
 import com.company.sqlite.GenericComs;
 
@@ -23,17 +24,17 @@ public class TransactionRepImpl implements GenericComs <Transaction> {
     }
 
     @Override
-    public boolean insert(Transaction transaction) {
+    public boolean insert(Transaction object) {
         return false;
     }
 
     @Override
-    public boolean delete(Transaction transaction) {
+    public boolean delete(Transaction object) {
         return false;
     }
 
     @Override
-    public boolean update() {
+    public boolean update(Transaction transaction) {
         return false;
     }
 }

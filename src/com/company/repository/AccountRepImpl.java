@@ -21,7 +21,6 @@ public class AccountRepImpl implements GenericComs <Account>  {
     /**
      * @return возвращает банковский счет по его номеру
      */
-
     public Account findAccountByAccountNum(String AccountNum) {
         Connection conn = DbCon.getConnection();
         String command = "Select * from Accounts where AccountNum = '" + AccountNum + "'";
@@ -43,11 +42,9 @@ public class AccountRepImpl implements GenericComs <Account>  {
         }
         return account;
     }
-
     /**
      * @return возвращает список счетов по статусу
      */
-
     public List<Account> searchByAccountStatus(AccountStatus status) {
         Connection conn = DbCon.getConnection();
         String command = "Select * from Accounts where AccountNum = '" + status.toString() + "'";
@@ -153,7 +150,7 @@ public class AccountRepImpl implements GenericComs <Account>  {
         Connection conn = DbCon.getConnection();
         String accountNum = account.getAccountNum();
         String customerId = account.getCustomerId();
-        String command = String.format("Delete from Accounts where AccountNum = '%s' AND CustomerId = '%s')", accountNum, customerId;
+        String command = String.format("Delete from Accounts where AccountNum = '%s' AND CustomerId = '%s'", accountNum, customerId);
         boolean result = false;
         Statement statement;
         try {
@@ -168,37 +165,18 @@ public class AccountRepImpl implements GenericComs <Account>  {
     }
 
     @Override
-    public boolean update(int columnToUpdate, String data) {
+    public boolean update(Account account) {
         Connection conn = DbCon.getConnection();
         boolean result = false;
-        int numberOfColumns = 0;
         try {
             Statement statement = null;
-            ResultSet rs = statement.executeQuery("SELECT * FROM TABLE");
-            ResultSetMetaData rsmd = rs.getMetaData();
-            numberOfColumns = rsmd.getColumnCount();
-            if (columnToUpdate > numberOfColumns) result = false;
-            else {
-                String command;
-
-
-                Statement stm;
-                try {
-                    stm = conn.createStatement();
-                    stm.executeUpdate(command);
-                    result = true;
-                }
-                catch (SQLException e) {
-                    e.printStackTrace();
-                }
-
-            }
+            String command = String.format("Update Accounts set CustomerId = '%s', Balance = '%s', Status = '%s' where AccountNum = '%s'",
+                    account.getCustomerId(), account.getBalance(), account.getStatus(), account.getAccountNum());
+            ResultSet rs = statement.executeQuery(command);
         }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-
-        return result ;
+        return result;
     }
 }
