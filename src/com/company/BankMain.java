@@ -14,17 +14,12 @@ import java.util.Scanner;
 public class BankMain {
 
     public static void main(String[] args) throws SQLException {
-        while (true) {
-            int desision = 0;
-            while(true){
-                System.out.println("Comma\n");
-                System.out.println("Select an option");
-                Scanner input = new Scanner(System.in);
-                break;
-            }
-            break;
-        }
-
+        Scanner inputName = new Scanner(System.in);
+        System.out.println("Enter firstname");
+        String name = inputName.nextLine();
+        System.out.println("Enter lastname");
+        String lastname = inputName.nextLine();
+        System.out.println(name + " " + lastname);
     }
 }
 
