@@ -11,11 +11,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerRepImpl implements GenericComs <Customer> {
+public class CustomerRepImpl implements GenericComs <Customer, Customer> {
 
-    public Customer findByPassId(String idToFind){
+    public Customer findByPassNum(String idToFind){
         Connection conn = DbCon.getConnection();
-        String command = String.format("Select * from Customers where PassId = '%s'", idToFind );
+        String command = String.format("Select * from Customers where PassNum = '%s'", idToFind );
         Statement statement;
         Customer result = null;
         try{
@@ -26,8 +26,8 @@ public class CustomerRepImpl implements GenericComs <Customer> {
                 String firstName = resultSet.getString("FirstName");
                 String lastName = resultSet.getString("LastName");
                 String id = resultSet.getString("Id");
-                String passId = resultSet.getString("PassId");
-                result = new Customer(firstName,lastName,id,passId);
+                String passNum = resultSet.getString("PassNum");
+                result = new Customer(firstName,lastName,id,passNum);
             }
         }
         catch (SQLException e)
@@ -50,8 +50,8 @@ public class CustomerRepImpl implements GenericComs <Customer> {
                 String firstName = resultSet.getString("FirstName");
                 String lastName = resultSet.getString("LastName");
                 String id = resultSet.getString("Id");
-                String passId = resultSet.getString("PassId");
-                temp = new Customer(firstName,lastName,id,passId);
+                String passNum = resultSet.getString("PassNum");
+                temp = new Customer(firstName,lastName,id,passNum);
                 customers.add(temp);
             }
             resultSet.close();
@@ -66,10 +66,10 @@ public class CustomerRepImpl implements GenericComs <Customer> {
     }
 
     @Override
-    public List<Customer> findById(String findId){
+    public Customer findById(String findId){
         Connection conn = DbCon.getConnection();
         String command = "Select * from Accounts where CustomerId = '" + findId + "'";
-        List<Customer> customers = new ArrayList<>();
+        Customer customer = null;
         Statement statement = null;
         try {
             statement = conn.createStatement();
@@ -78,14 +78,14 @@ public class CustomerRepImpl implements GenericComs <Customer> {
                 String firstName = resultSet.getString("FirstName");
                 String lastName = resultSet.getString("LastName");
                 String id = resultSet.getString("Id");
-                String passId = resultSet.getString("PassId");
-                customers.add(new Customer(firstName, lastName, id,passId));
+                String passNum = resultSet.getString("PassNum");
+                customer = new Customer(firstName, lastName, id,passNum);
             }
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
-        return customers;
+        return customer;
     }
 
     @Override
@@ -101,8 +101,8 @@ public class CustomerRepImpl implements GenericComs <Customer> {
                 String firstName = resultSet.getString("FirstName");
                 String lastName = resultSet.getString("LastName");
                 String id = resultSet.getString("Id");
-                String passId = resultSet.getString("PassId");
-                customers.add(new Customer(firstName, lastName, id,passId));
+                String passNum = resultSet.getString("PassNum");
+                customers.add(new Customer(firstName, lastName, id,passNum));
             }
         }
         catch (SQLException e) {
@@ -114,8 +114,8 @@ public class CustomerRepImpl implements GenericComs <Customer> {
     @Override
     public  boolean insert(Customer customer) {
         Connection conn = DbCon.getConnection();
-        String command = String.format("Insert into Customers (FirstName, LastName, Id, PassId)" + "values ('%s', '%s','%s','%s')",
-                customer.getFirstName(),customer.getLastName(),customer.getId(),customer.getPassID());
+        String command = String.format("Insert into Customers (FirstName, LastName, Id, PassNum)" + "values ('%s', '%s','%s','%s')",
+                customer.getFirstName(),customer.getLastName(),customer.getId(),customer.getPassNum());
         boolean result = false;
         Statement statement = null;
         try {
@@ -133,7 +133,7 @@ public class CustomerRepImpl implements GenericComs <Customer> {
     @Override
     public  boolean delete(Customer customer) {
         Connection conn = DbCon.getConnection();
-        String command = String.format("Delete from Customers where Id  = '%s' AND PassId= '%s'", customer.getId(), customer.getPassID());
+        String command = String.format("Delete from Customers where Id  = '%s' AND PassNum= '%s'", customer.getId(), customer.getPassNum());
         boolean result = false;
         Statement statement;
         try {

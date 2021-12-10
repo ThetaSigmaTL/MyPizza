@@ -13,14 +13,14 @@ import java.util.Objects;
  */
 public class Transaction {
 
-    private final int transactionID;
-    private final int payeeID;
-    private final int senderID;
+    private final String transactionID;
+    private final String payeeID;
+    private final String senderID;
     private final BigDecimal sum;
     private final TransactionType transactionType;
     private final Timestamp timestamp;
 
-    public Transaction(int transactionID, int payeeID, int senderID, BigDecimal sum, TransactionType transactionType, Timestamp timestamp) {
+    public Transaction(String transactionID, String payeeID, String senderID, BigDecimal sum, TransactionType transactionType, Timestamp timestamp) {
         this.transactionID = transactionID;
         this.payeeID = payeeID;
         this.senderID = senderID;
@@ -29,15 +29,15 @@ public class Transaction {
         this.timestamp = timestamp;
     }
 
-    public int getTransactionID() {
+    public String getTransactionID() {
         return transactionID;
     }
 
-    public int getPayeeID() {
+    public String getPayeeID() {
         return payeeID;
     }
 
-    public int getSenderID() {
+    public String getSenderID() {
         return senderID;
     }
 
@@ -47,6 +47,10 @@ public class Transaction {
 
     public TransactionType getTransactionType() {
         return transactionType;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
     }
 
     @Override

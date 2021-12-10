@@ -12,14 +12,14 @@ public class Customer {
    private final String firstName;
    private final String lastName;
    private final String id;
-   private final String passID;
+   private final  String passNum;
    private List<Account> accounts;
 
-    public Customer(String firstName,String lastName, String id, String passID) {
+    public Customer(String firstName,String lastName, String id, String passNum) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.id = id;
-        this.passID = passID;
+        this.passNum = passNum;
 
     }
 
@@ -35,8 +35,8 @@ public class Customer {
         return id;
     }
 
-    public String getPassID() {
-        return passID;
+    public String getPassNum() {
+        return passNum;
     }
 
     @Override
@@ -45,12 +45,12 @@ public class Customer {
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
         return firstName.equals(customer.firstName) && lastName.equals(customer.lastName) && id.equals(customer.id)
-                && passID.equals(customer.passID) && accounts.equals(customer.accounts);
+                && passNum.equals(customer.passNum) && accounts.equals(customer.accounts);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, id, passID, accounts);
+        return Objects.hash(firstName, lastName, id, passNum, accounts);
     }
 
     public List<Account> getAccounts() {

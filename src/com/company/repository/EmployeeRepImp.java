@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeRepImp implements GenericComs <Employee> {
+public class EmployeeRepImp implements GenericComs <Employee, Employee> {
 
 
     @Override
@@ -49,7 +49,7 @@ public class EmployeeRepImp implements GenericComs <Employee> {
     }
 
     @Override
-    public List<Employee> findById(String id) {
+    public Employee findById(String id) {
         Connection conn = DbCon.getConnection();
         String command = String.format("Select * from Employees where Id = '%s'", id);
         List<Employee> employees = new ArrayList<>();
@@ -63,6 +63,7 @@ public class EmployeeRepImp implements GenericComs <Employee> {
         catch (SQLException e){
 
         }
+        return null;
     }
 
     @Override

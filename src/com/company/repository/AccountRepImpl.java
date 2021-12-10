@@ -14,7 +14,7 @@ import java.util.List;
  * Класс реализирующий {@link GenericComs}
  * @author ThetaSigma 22.08.2021
  */
-public class AccountRepImpl implements GenericComs <Account>  {
+public class AccountRepImpl implements GenericComs <Account, List>  {
 
     private final List<Account> accounts = new ArrayList<>();
 
