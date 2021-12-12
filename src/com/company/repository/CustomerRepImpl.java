@@ -48,13 +48,18 @@ public class CustomerRepImpl implements GenericComs <Customer, Customer> {
             PreparedStatement selectCommand = (PreparedStatement) conn.prepareStatement(command);
             ResultSet resultSet = selectCommand.executeQuery();
             while (resultSet.next()){
-                Customer temp;
-                String firstName = resultSet.getString("FirstName");
-                String lastName = resultSet.getString("LastName");
-                String id = resultSet.getString("Id");
-                String passNum = resultSet.getString("PassNum");
-                temp = new Customer(firstName,lastName,id,passNum);
-                customers.add(temp);
+                try {
+                    Customer temp;
+                    String firstName = resultSet.getString("FirstName");
+                    String lastName = resultSet.getString("LastName");
+                    String id = resultSet.getString("Id");
+                    String passNum = resultSet.getString("PassNum");
+                    temp = new Customer(firstName,lastName,id,passNum);
+                    customers.add(temp);
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
             }
             resultSet.close();
             selectCommand.close();
