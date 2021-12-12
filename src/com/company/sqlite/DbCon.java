@@ -16,7 +16,6 @@ public class DbCon {
         try {
             Class.forName("org.sqlite.JDBC");
             conn = DriverManager.getConnection(dbPath);
-            System.out.println("Connection established");
         }
         catch (SQLException | ClassNotFoundException throwables) {
             System.out.println(throwables.getMessage());

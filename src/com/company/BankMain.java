@@ -1,12 +1,18 @@
 package com.company;
 
+import com.company.menus.CustomerMenu;
 import com.company.model.Customer;
+import com.company.model.IdGenerator;
 import com.company.sqlite.DbCon;
+import org.junit.platform.commons.function.Try;
+
 import java.sql.*;
+import java.util.UUID;
 
 public class BankMain {
     public static void main(String[] args) throws SQLException {
-        Customer customer = new Customer("Tom", "Handerson","123","1234567890");
+        CustomerMenu customerMenu = new CustomerMenu();
+        customerMenu.startMenu();
     }
 }
 

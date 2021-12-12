@@ -14,11 +14,11 @@ import java.util.Scanner;
 
 public class CustomerRepImpl implements GenericComs <Customer, Customer> {
 
-    public Customer findByPassNum(String idToFind){
-        if (idToFind.length() != 36)
-            throw new IllegalArgumentException("Invalid id");
+    public Customer findByPassNum(String passNum){
+        if (passNum.length() != 10)
+            throw new IllegalArgumentException("Invalid passport num");
         Connection conn = DbCon.getConnection();
-        String command = String.format("Select * from Customers where PassNum = '%s'", idToFind );
+        String command = String.format("Select * from Customers where PassNum = '%s'", passNum );
         Statement statement;
         Customer result = null;
         try{
@@ -28,8 +28,8 @@ public class CustomerRepImpl implements GenericComs <Customer, Customer> {
                 String firstName = resultSet.getString("FirstName");
                 String lastName = resultSet.getString("LastName");
                 String id = resultSet.getString("Id");
-                String passNum = resultSet.getString("PassNum");
-                result = new Customer(firstName,lastName,id,passNum);
+                String passportNum = resultSet.getString("PassNum");
+                result = new Customer(firstName,lastName,id,passportNum);
             }
         }
         catch (SQLException e)
@@ -48,13 +48,18 @@ public class CustomerRepImpl implements GenericComs <Customer, Customer> {
             PreparedStatement selectCommand = (PreparedStatement) conn.prepareStatement(command);
             ResultSet resultSet = selectCommand.executeQuery();
             while (resultSet.next()){
-                Customer temp;
-                String firstName = resultSet.getString("FirstName");
-                String lastName = resultSet.getString("LastName");
-                String id = resultSet.getString("Id");
-                String passNum = resultSet.getString("PassNum");
-                temp = new Customer(firstName,lastName,id,passNum);
-                customers.add(temp);
+                try {
+                    Customer temp;
+                    String firstName = resultSet.getString("FirstName");
+                    String lastName = resultSet.getString("LastName");
+                    String id = resultSet.getString("Id");
+                    String passNum = resultSet.getString("PassNum");
+                    temp = new Customer(firstName,lastName,id,passNum);
+                    customers.add(temp);
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
             }
             resultSet.close();
             selectCommand.close();

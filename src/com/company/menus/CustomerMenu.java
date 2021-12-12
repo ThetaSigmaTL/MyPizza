@@ -2,11 +2,16 @@ package com.company.menus;
 import com.company.model.Customer;
 import com.company.model.IdGenerator;
 import com.company.repository.CustomerRepImpl;
+import java.io.*;
+import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class CustomerMenu {
+    public static final String redColor= "\\u001B[31m";
+    public static final String resetColor = "\\u001B[0m";
     public void startMenu() {
         int userChoise = 0;
         boolean isMenuActive = true;
@@ -15,7 +20,7 @@ public class CustomerMenu {
             System.out.println("Options for customers management:");
             System.out.println("1. Find by passport number\n2. Find by ID\n3. Find by name\n4.Get all\n5.Insert\n6.Update\n7.Delete\n8.Cancel");
             while (true) {
-                System.out.println("Select an option...\n");
+                System.out.print("Select an option: ");
                 Scanner input = new Scanner(System.in);
                 try {
                     userChoise = input.nextInt();
@@ -27,21 +32,31 @@ public class CustomerMenu {
             switch (userChoise) {
                 case 1:{
                     System.out.println("Find by passport number selected");
-                    System.out.println("Enter number...");
+                    System.out.print("Enter the number: ");
                     Scanner inputPassNum = new Scanner(System.in);
                     CustomerRepImpl customerRep = new CustomerRepImpl();
                     try {
-                        Customer customer = customerRep.findByPassNum(inputPassNum.nextLine());
+                        String passNum = inputPassNum.nextLine();
+                        if (!passNum.matches("//d{10}")) {
+                            System.out.println(redColor + "Incorrect input!" + resetColor);
+                            break;
+                        }
+                        Customer customer = customerRep.findByPassNum(passNum);
+                        if (customer == null){
+                            System.out.println("No such customer!");
+                            break;
+                        }
                         System.out.println(" ");
                         System.out.println(customer.getFirstName() + " " + customer.getLastName() + " " + customer.getPassNum() + " " + customer.getId());
-                    } catch (Exception e) {
-                            System.out.println("Please enter 10-digit passport number");
+                    } catch (Exception exception ) {
+                            System.out.println("Please enter 10-digit passport number!");
+                            break;
                     }
                     break;
                 }
                 case 2:{
                     System.out.println("Find by ID selected");
-                    System.out.println("Enter customer ID");
+                    System.out.print("Enter customer ID: ");
                     Scanner inputId = new Scanner(System.in);
                     CustomerRepImpl customerRep = new CustomerRepImpl();
                     try {
@@ -51,7 +66,7 @@ public class CustomerMenu {
 
                     } catch (Exception e) {
                         e.printStackTrace();
-                        System.out.println("Please enter correct cuctomer ID");
+                        System.out.println("Please enter correct cuctomer ID!");
                     }
                     break;
                 }
@@ -61,16 +76,17 @@ public class CustomerMenu {
                     List<Customer> customerList = new ArrayList<>();
                     CustomerRepImpl customerRep = new CustomerRepImpl();
                     try {
-                        System.out.println("Enter firstname");
+                        System.out.print("Enter firstname: ");
                         String name = inputName.nextLine();
-                        System.out.println("Enter lastname");
+                        System.out.println(" ");
+                        System.out.print("Enter lastname: ");
                         String lastname = inputName.nextLine();
                         customerList = customerRep.findByName(name, lastname);
                         for (Customer customer : customerList) {
                             System.out.println(customer.getFirstName() + " " + customer.getLastName() + " " + customer.getId() + " " + customer.getPassNum());
                         }
                     } catch (Exception e) {
-                        System.out.println("Enter firstname and lastname of customer");
+                        System.out.println("Enter firstname and lastname of customer!");
                     }
                     break;
                 }
@@ -94,13 +110,14 @@ public class CustomerMenu {
                     CustomerRepImpl customerRep = new CustomerRepImpl();
                     System.out.println("Insert customer selected");
                     try {
-                        System.out.println("Enter name");
+                        System.out.print("Enter name: ");
                         String name = input.nextLine();
-                        System.out.println("Enter Lastname");
+                        System.out.print("Enter Lastname: ");
                         String lastname = input.nextLine();
-                        System.out.println("Enter passport number");
+                        System.out.print("Enter passport number: ");
                         String passNum = input.nextLine();
                         Customer customer = new Customer(name, lastname, IdGenerator.generateID(), passNum);
+
                         customerRep.insert(customer);
                     } catch (Exception e) {
                         System.out.println(e);
@@ -112,12 +129,12 @@ public class CustomerMenu {
                     CustomerRepImpl customerRep = new CustomerRepImpl();
                     System.out.println("Update customer personal information selected");
                     try {
-                        System.out.println("Enter customer ID to update personal information");
+                        System.out.print("Enter customer ID to update personal information: ");
                         String id = input.nextLine();
                         Customer customer = customerRep.findById(id);
                         customerRep.update(customer);
                     } catch (Exception e) {
-                        System.out.println("Enter customer ID to update personal information");
+                        System.out.println("Enter customer ID to update personal information!");
                     }
                     break;
                 }
@@ -126,13 +143,13 @@ public class CustomerMenu {
                     CustomerRepImpl customerRep = new CustomerRepImpl();
                     System.out.println("Delete customer selected");
                     try {
-                        System.out.println("Enter customer id to delete");
+                        System.out.print("Enter customer id to delete: ");
                         String id = input.nextLine();
                         Customer customer = customerRep.findById(id);
                         customerRep.delete(customer);
                     }
                     catch (Exception e){
-                        System.out.println("Enter valid customer id");
+                        System.out.println("Enter valid customer id!");
                     }
                     break;
                 }

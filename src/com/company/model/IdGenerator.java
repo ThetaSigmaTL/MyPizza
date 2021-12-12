@@ -10,7 +10,7 @@ import java.util.UUID;
 public class IdGenerator {
 
    public static String generateID(){
-               String id = String.format("%040d", new BigInteger(UUID.randomUUID().toString().replace("-",""),16));
+               String id = UUID.randomUUID().toString();
                return id;
    }
 
