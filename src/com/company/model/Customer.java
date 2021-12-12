@@ -1,8 +1,9 @@
 package com.company.model;
 
+import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.NullString;
 import java.util.List;
 import java.util.Objects;
-
+import java.lang.annotation.*;
 /**
  * Класс клиента
  * @author ThetaSigma 22.08.2021
@@ -15,7 +16,10 @@ public class Customer {
    private final  String passNum;
    private List<Account> accounts;
 
-    public Customer(String firstName,String lastName, String id, String passNum) {
+    public Customer(String firstName, String lastName, String id, String passNum) {
+        if (id.length() != 36 || passNum.length() != 10){
+            throw new IllegalArgumentException("Id or passport number is not valid");
+        }
         this.firstName = firstName;
         this.lastName = lastName;
         this.id = id;
@@ -52,11 +56,9 @@ public class Customer {
     public int hashCode() {
         return Objects.hash(firstName, lastName, id, passNum, accounts);
     }
-
     public List<Account> getAccounts() {
 
         return accounts;
-
     }
 
 

@@ -10,10 +10,13 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class CustomerRepImpl implements GenericComs <Customer, Customer> {
 
     public Customer findByPassNum(String idToFind){
+        if (idToFind.length() != 36)
+            throw new IllegalArgumentException("Invalid id");
         Connection conn = DbCon.getConnection();
         String command = String.format("Select * from Customers where PassNum = '%s'", idToFind );
         Statement statement;
@@ -22,7 +25,6 @@ public class CustomerRepImpl implements GenericComs <Customer, Customer> {
             statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(command);
             while (resultSet.next()){
-
                 String firstName = resultSet.getString("FirstName");
                 String lastName = resultSet.getString("LastName");
                 String id = resultSet.getString("Id");
@@ -68,9 +70,9 @@ public class CustomerRepImpl implements GenericComs <Customer, Customer> {
     @Override
     public Customer findById(String findId){
         Connection conn = DbCon.getConnection();
-        String command = "Select * from Accounts where CustomerId = '" + findId + "'";
+        String command = "Select * from Customers where Id = '" + findId + "'";
         Customer customer = null;
-        Statement statement = null;
+        Statement statement;
         try {
             statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(command);
@@ -152,15 +154,22 @@ public class CustomerRepImpl implements GenericComs <Customer, Customer> {
         Connection conn = DbCon.getConnection();
         boolean result = false;
         try {
-            Statement statement = null;
-            String command = String.format("Update Customers set FirstName = '%s' and LastName = '%s' where Id = '%s'",
-                    customer.getFirstName(), customer.getLastName());
-            ResultSet rs = statement.executeQuery(command);
-        } catch (SQLException throwables) {
+            Scanner input = new Scanner(System.in);
+            System.out.println("Enter new name");
+            String name = input.nextLine();
+            System.out.println("Enter new lastname");
+            String lastname = input.nextLine();
+            System.out.println("Enter new passport number");
+            String numPass = input.nextLine();
+            Statement statement = conn.createStatement();
+            String command = String.format("Update Customers set FirstName = '%s' and LastName = '%s' and PassNum = '%s' where Id = '%s'",
+                    name, lastname, numPass, customer.getId());
+            statement.executeUpdate(command);
+            result = true;
+        }
+        catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return result;
     }
-
-
 }
