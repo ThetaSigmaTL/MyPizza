@@ -10,15 +10,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CustomerMenu {
-    public static final String redColor= "\\u001B[31m";
-    public static final String resetColor = "\\u001B[0m";
     public void startMenu() {
         int userChoise = 0;
         boolean isMenuActive = true;
         while (isMenuActive)  {
             System.out.println(" ");
             System.out.println("Options for customers management:");
-            System.out.println("1. Find by passport number\n2. Find by ID\n3. Find by name\n4.Get all\n5.Insert\n6.Update\n7.Delete\n8.Cancel");
+            System.out.println("1. Find by passport number\n2. Find by ID\n3.Insert\n4.Update\n5.Delete\n6.Cancel");
             while (true) {
                 System.out.print("Select an option: ");
                 Scanner input = new Scanner(System.in);
@@ -32,13 +30,13 @@ public class CustomerMenu {
             switch (userChoise) {
                 case 1:{
                     System.out.println("Find by passport number selected");
-                    System.out.print("Enter the number: ");
+                    System.out.print("Enter 10-digit passport number: ");
                     Scanner inputPassNum = new Scanner(System.in);
                     CustomerRepImpl customerRep = new CustomerRepImpl();
                     try {
                         String passNum = inputPassNum.nextLine();
                         if (!passNum.matches("//d{10}")) {
-                            System.out.println(redColor + "Incorrect input!" + resetColor);
+                            System.out.println("Incorrect input!");
                             break;
                         }
                         Customer customer = customerRep.findByPassNum(passNum);
@@ -56,17 +54,16 @@ public class CustomerMenu {
                 }
                 case 2:{
                     System.out.println("Find by ID selected");
-                    System.out.print("Enter customer ID: ");
+                    System.out.print("Enter 36 character customer ID: ");
                     Scanner inputId = new Scanner(System.in);
                     CustomerRepImpl customerRep = new CustomerRepImpl();
                     try {
                         Customer customer = customerRep.findById(inputId.nextLine());
                         System.out.println(" ");
                         System.out.println(customer.getFirstName() + " " + customer.getLastName() + " " + customer.getPassNum() + " " + customer.getId());
-
                     } catch (Exception e) {
                         e.printStackTrace();
-                        System.out.println("Please enter correct cuctomer ID!");
+                        System.out.println("Please enter correct customer ID!");
                     }
                     break;
                 }

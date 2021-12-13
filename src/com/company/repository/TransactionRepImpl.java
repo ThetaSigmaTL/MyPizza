@@ -1,14 +1,9 @@
 package com.company.repository;
 
-import com.company.model.Account;
-import com.company.model.Customer;
-import com.company.model.Employee;
 import com.company.model.Transaction;
-import com.company.model.enums.AccountStatus;
 import com.company.model.enums.TransactionType;
 import com.company.sqlite.DbCon;
 import com.company.sqlite.GenericComs;
-import jdk.jshell.spi.ExecutionControl;
 
 import java.math.BigDecimal;
 import java.sql.*;
@@ -16,6 +11,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionRepImpl implements GenericComs <Transaction, Transaction> {
+
+    public List<Transaction> findBySender(String accountNum){
+        Connection conn = DbCon.getConnection();
+        String command = String.format("Select * from Transactions where SenderAccountNum = '%s'", accountNum);
+        List<Transaction> transactionList = new ArrayList<>();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery(command);
+            while(resultSet.next()){
+
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Transaction> findByPayee(){
+        return null;
+    }
 
     @Override
     public List<Transaction> getAll() {
@@ -80,8 +96,8 @@ public class TransactionRepImpl implements GenericComs <Transaction, Transaction
         Connection conn = DbCon.getConnection();
         boolean result = false;
         String transactionId = transaction.getTransactionID();
-        String payeeId = transaction.getPayeeID();
-        String senderId = transaction.getSenderID();
+        String payeeId = transaction.getPayeeAccountNum();
+        String senderId = transaction.getSenderAccountNum();
         String sum = transaction.getSum().toString();
         String transactionType = transaction.getTransactionType().toString();
         String timeStamp = transaction.getTimestamp().toString();

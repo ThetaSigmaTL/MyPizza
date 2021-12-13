@@ -4,7 +4,6 @@ import com.company.model.enums.TransactionType;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -14,16 +13,18 @@ import java.util.Objects;
 public class Transaction {
 
     private final String transactionID;
-    private final String payeeID;
-    private final String senderID;
+    private final String payeeAccountNum;
+    private final String senderAccountNum;
     private final BigDecimal sum;
     private final TransactionType transactionType;
     private final Timestamp timestamp;
 
-    public Transaction(String transactionID, String payeeID, String senderID, BigDecimal sum, TransactionType transactionType, Timestamp timestamp) {
+    public Transaction(String transactionID, String payeeAccountNum, String senderAccountNum, BigDecimal sum, TransactionType transactionType, Timestamp timestamp) {
+        if(transactionID.length() != 36 & (payeeAccountNum.length() & senderAccountNum.length()) != 20)
+            throw new IllegalArgumentException();
         this.transactionID = transactionID;
-        this.payeeID = payeeID;
-        this.senderID = senderID;
+        this.payeeAccountNum = payeeAccountNum;
+        this.senderAccountNum = senderAccountNum;
         this.sum = sum;
         this.transactionType = transactionType;
         this.timestamp = timestamp;
@@ -33,12 +34,12 @@ public class Transaction {
         return transactionID;
     }
 
-    public String getPayeeID() {
-        return payeeID;
+    public String getPayeeAccountNum() {
+        return payeeAccountNum;
     }
 
-    public String getSenderID() {
-        return senderID;
+    public String getSenderAccountNum() {
+        return senderAccountNum;
     }
 
     public BigDecimal getSum() {
@@ -58,12 +59,12 @@ public class Transaction {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Transaction that = (Transaction) o;
-        return transactionID == that.transactionID && payeeID == that.payeeID && senderID == that.senderID &&
+        return transactionID == that.transactionID && payeeAccountNum == that.payeeAccountNum && senderAccountNum == that.senderAccountNum &&
                 sum.equals(that.sum) && transactionType == that.transactionType;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(transactionID, payeeID, senderID, sum, transactionType);
+        return Objects.hash(transactionID, payeeAccountNum, senderAccountNum, sum, transactionType);
     }
 }
