@@ -1,10 +1,8 @@
 package com.company.menus;
 import com.company.model.Customer;
 import com.company.model.IdGenerator;
-import com.company.repository.CustomerRepImpl;
-import java.io.*;
-import java.sql.SQLDataException;
-import java.sql.SQLException;
+import com.company.repository.CustomerDAO;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,7 +14,7 @@ public class CustomerMenu {
         while (isMenuActive)  {
             System.out.println(" ");
             System.out.println("Options for customers management:");
-            System.out.println("1. Find by passport number\n2. Find by ID\n3.Insert\n4.Update\n5.Delete\n6.Cancel");
+            System.out.println("1. Find by passport number\n2. Find by ID\n3. Find by name\n4. Get all\n5. Insert\n6. Update\n7. Delete\n8. Cancel");
             while (true) {
                 System.out.print("Select an option: ");
                 Scanner input = new Scanner(System.in);
@@ -32,7 +30,7 @@ public class CustomerMenu {
                     System.out.println("Find by passport number selected");
                     System.out.print("Enter 10-digit passport number: ");
                     Scanner inputPassNum = new Scanner(System.in);
-                    CustomerRepImpl customerRep = new CustomerRepImpl();
+                    CustomerDAO customerRep = new CustomerDAO();
                     try {
                         String passNum = inputPassNum.nextLine();
                         if (!passNum.matches("//d{10}")) {
@@ -56,7 +54,7 @@ public class CustomerMenu {
                     System.out.println("Find by ID selected");
                     System.out.print("Enter 36 character customer ID: ");
                     Scanner inputId = new Scanner(System.in);
-                    CustomerRepImpl customerRep = new CustomerRepImpl();
+                    CustomerDAO customerRep = new CustomerDAO();
                     try {
                         Customer customer = customerRep.findById(inputId.nextLine());
                         System.out.println(" ");
@@ -71,7 +69,7 @@ public class CustomerMenu {
                     System.out.println("Find by name selected");
                     Scanner inputName = new Scanner(System.in);
                     List<Customer> customerList = new ArrayList<>();
-                    CustomerRepImpl customerRep = new CustomerRepImpl();
+                    CustomerDAO customerRep = new CustomerDAO();
                     try {
                         System.out.print("Enter firstname: ");
                         String name = inputName.nextLine();
@@ -90,7 +88,7 @@ public class CustomerMenu {
                 case 4:{
                     System.out.println("Get all customers selected");
                     List<Customer> customerList;
-                    CustomerRepImpl customerRep = new CustomerRepImpl();
+                    CustomerDAO customerRep = new CustomerDAO();
                     try {
                         customerList = customerRep.getAll();
                         for (Customer customer : customerList) {
@@ -104,7 +102,7 @@ public class CustomerMenu {
                 }
                 case 5:{
                     Scanner input = new Scanner(System.in);
-                    CustomerRepImpl customerRep = new CustomerRepImpl();
+                    CustomerDAO customerRep = new CustomerDAO();
                     System.out.println("Insert customer selected");
                     try {
                         System.out.print("Enter name: ");
@@ -123,7 +121,7 @@ public class CustomerMenu {
                 }
                 case 6:{
                     Scanner input = new Scanner(System.in);
-                    CustomerRepImpl customerRep = new CustomerRepImpl();
+                    CustomerDAO customerRep = new CustomerDAO();
                     System.out.println("Update customer personal information selected");
                     try {
                         System.out.print("Enter customer ID to update personal information: ");
@@ -137,7 +135,7 @@ public class CustomerMenu {
                 }
                 case 7:{
                     Scanner input = new Scanner(System.in);
-                    CustomerRepImpl customerRep = new CustomerRepImpl();
+                    CustomerDAO customerRep = new CustomerDAO();
                     System.out.println("Delete customer selected");
                     try {
                         System.out.print("Enter customer id to delete: ");

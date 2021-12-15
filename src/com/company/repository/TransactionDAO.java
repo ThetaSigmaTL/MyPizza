@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionRepImpl implements GenericComs <Transaction, Transaction> {
+public class TransactionDAO implements GenericComs <Transaction, Transaction> {
 
     public List<Transaction> findBySender(String accountNum){
         Connection conn = DbCon.getConnection();

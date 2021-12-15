@@ -2,8 +2,8 @@ package com.company.menus;
 
 import com.company.model.Customer;
 import com.company.model.Transaction;
-import com.company.repository.CustomerRepImpl;
-import com.company.repository.TransactionRepImpl;
+import com.company.model.enums.TransactionType;
+import com.company.repository.TransactionDAO;
 
 import java.util.List;
 import java.util.Scanner;
@@ -15,7 +15,7 @@ public class TransactionMenu {
         while (isMenuActive) {
             System.out.println(" ");
             System.out.println("Options for transaction management:");
-            System.out.println("1.Get all transactions\n2. Find by ID\n3. Find by name\n4.Get all\n5.Insert\n6.Update\n7.Delete\n8.Cancel");
+            System.out.println("1.Get all transactions\n2. Find by ID\n3.Insert\n4.Update\n5.Delete\n6.Cancel");
             while (true) {
                 System.out.print("Select an option: ");
                 Scanner input = new Scanner(System.in);
@@ -27,15 +27,15 @@ public class TransactionMenu {
                 }
             }
         }
-        switch (userChoise){
-            case 1:{
+        switch (userChoise) {
+            case 1: {
                 System.out.println("Get all transactions selected");
                 List<Transaction> transactionList;
-                TransactionRepImpl transactionRep = new TransactionRepImpl();
+                TransactionDAO transactionRep = new TransactionDAO();
                 try {
                     transactionList = transactionRep.getAll();
                     for (Transaction transaction : transactionList) {
-                        System.out.println(transaction.getTransactionID() + "|" + transaction.getTransactionType() + "|" + transaction.getPayeeAccountNum()+ "|"
+                        System.out.println(transaction.getTransactionID() + "|" + transaction.getTransactionType() + "|" + transaction.getPayeeAccountNum() + "|"
                                 + transaction.getSenderAccountNum() + "|" + transaction.getSum() + "|" + transaction.getTimestamp());
                     }
                 } catch (Exception e) {
@@ -47,16 +47,30 @@ public class TransactionMenu {
                 System.out.println("Find by ID selected");
                 System.out.print("Enter 36 character transaction ID: ");
                 Scanner inputId = new Scanner(System.in);
-                CustomerRepImpl customerRep = new CustomerRepImpl();
+                TransactionDAO transactionRep = new TransactionDAO();
                 try {
-                    Customer customer = customerRep.findById(inputId.nextLine());
+                    Transaction transaction = transactionRep.findById(inputId.nextLine());
                     System.out.println(" ");
-                    System.out.println(customer.getFirstName() + " " + customer.getLastName() + " " + customer.getPassNum() + " " + customer.getId());
+                    System.out.println(transaction.getTransactionID() + " " + transaction.getTransactionType() + " " + transaction.getPayeeAccountNum() + " "
+                            + transaction.getSenderAccountNum() + " "   + transaction.getSum() + " " + transaction.getTimestamp());
                 } catch (Exception e) {
                     e.printStackTrace();
-                    System.out.println("Please enter correct customer ID!");
+                    System.out.println("Please enter correct transaction ID!");
                 }
                 break;
+            }
+            case 3: {
+                System.out.println("Insert transaction selected");
+                Scanner input = new Scanner(System.in);
+                TransactionDAO transactionDAO = new TransactionDAO();
+                try {
+                    System.out.print("Choose transaction type (transfer or ATM): ");
+                    String transactionTypeString = input.nextLine();
+                    if (transactionTypeString.equals(TransactionType.ATM) ^ transactionTypeString.equals(TransactionType.Transfer));
+                }
+                catch (Exception exception){
+
+                }
             }
         }
     }

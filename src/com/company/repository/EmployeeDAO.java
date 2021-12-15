@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeRepImp implements GenericComs <Employee, Employee> {
+public class EmployeeDAO implements GenericComs <Employee, Employee> {
 
 
     @Override

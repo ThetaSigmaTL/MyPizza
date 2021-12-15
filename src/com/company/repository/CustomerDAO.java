@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class CustomerRepImpl implements GenericComs <Customer, Customer> {
+public class CustomerDAO implements GenericComs <Customer, Customer> {
 
     public Customer findByPassNum(String passNum){
         if (passNum.length() != 10)
