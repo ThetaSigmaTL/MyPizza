@@ -12,9 +12,9 @@ import java.util.UUID;
 
 public class BankMain {
     public static void main(String[] args) throws SQLException {
-        String b = "Atm";
-        boolean a = b.equalsIgnoreCase(TransactionType.ATM.toString());
-        System.out.println(a);
+        System.out.println("ssss");
+        System.out.print("aaaa");
+        System.out.println("asd");
     }
 }
 

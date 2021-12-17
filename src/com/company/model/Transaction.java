@@ -22,6 +22,7 @@ public class Transaction {
     public Transaction(String transactionID, String payeeAccountNum, String senderAccountNum, BigDecimal sum, TransactionType transactionType, Timestamp timestamp) {
         if(transactionID.length() != 36 & (payeeAccountNum.length() & senderAccountNum.length()) != 20)
             throw new IllegalArgumentException();
+        if (new BigDecimal("0").compareTo(sum) == 1 | new BigDecimal("0").compareTo(sum) == 0);
         this.transactionID = transactionID;
         this.payeeAccountNum = payeeAccountNum;
         this.senderAccountNum = senderAccountNum;
