@@ -1,22 +1,30 @@
 package com.company;
+import com.company.menus.MainMenu;
 
-import com.company.menus.CustomerMenu;
-import com.company.model.Customer;
-import com.company.model.IdGenerator;
-import com.company.model.enums.TransactionType;
-import com.company.sqlite.DbCon;
-import org.junit.platform.commons.function.Try;
-
-import java.sql.*;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class BankMain {
-    public static void main(String[] args) throws SQLException {
-        System.out.println("ssss");
-        System.out.print("aaaa");
-        System.out.println("asd");
+    public static void main(String[] args){
+        User user = new User("Tom");
+        User user1 = new User("Jake");
+        System.out.println(User.getAllUsers().toString());
     }
 }
+  class User {
+    public String name;
+    private static int id = 0;
+    private static  HashMap<Integer, User> allUsers = new HashMap<>();
+    User(String name){
+        this.name = name;
+        id++;
+        allUsers.put(id,this);
+    }
+      public static HashMap<Integer, User> getAllUsers() {
+          return allUsers;
+      }
+  }
 
 
 
