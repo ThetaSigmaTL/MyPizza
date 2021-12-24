@@ -4,11 +4,9 @@ import com.company.model.AccountNumGenerator;
 import com.company.model.IdGenerator;
 import com.company.model.enums.AccountStatus;
 import org.junit.jupiter.api.BeforeEach;
-import org.mockito.Mock;
 import org.junit.jupiter.api.Test;
-
 import java.math.BigDecimal;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 class AccountTest {
     private Account account;
     @BeforeEach
@@ -18,7 +16,8 @@ class AccountTest {
 
     @Test
     void deposit() {
-
+        account.addBalance(new BigDecimal(100));
+        assertEquals(new BigDecimal(10100),account.getBalance());
     }
 
     @Test

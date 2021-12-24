@@ -42,7 +42,6 @@ public class AccountMenu {
                     catch (Exception ex){
                         System.out.println("Enter 20-digit account number");
                     }
-
                 }
                 case 2: {
                     System.out.println("Search by account status selected");
@@ -197,7 +196,6 @@ public class AccountMenu {
                                 break;
                             }
                         }
-
                     }
                     catch (Exception ex){
 

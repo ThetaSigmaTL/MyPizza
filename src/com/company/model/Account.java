@@ -14,7 +14,7 @@ import java.util.Objects;
 public class Account {
     private final String accountNum;
     private final String customerId;
-    private final BigDecimal balance;
+    private  BigDecimal balance;
     private AccountStatus status;
     private final List<Transaction> transactionsList = new ArrayList<>();
 
@@ -36,13 +36,13 @@ public class Account {
 
     public void addBalance(BigDecimal deposit){
         if (deposit != null){
-            balance.add(deposit);
+           balance = balance.add(deposit);
         }
     }
 
-    public void subBalance(BigDecimal withdraw) {
-        if (withdraw != null){
-            balance.subtract(withdraw);
+    public void subBalance(BigDecimal withdraw)  {
+        if (withdraw != null & (withdraw.compareTo(balance) != 1)){
+            balance = balance.subtract(withdraw);
         }
     }
 
