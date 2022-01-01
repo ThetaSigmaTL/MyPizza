@@ -6,12 +6,12 @@ import com.company.model.enums.AccountStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+ import static org.junit.jupiter.api.Assertions.assertEquals;
 class AccountTest {
     private Account account;
     @BeforeEach
     void setUp () throws Exception{
-        account = new Account(AccountNumGenerator.accountNum(), new BigDecimal("10000"), AccountStatus.Active, IdGenerator.generateID());
+        account = new Account("12345678901234567890", new BigDecimal("10000"), AccountStatus.Active, IdGenerator.generateID());
     }
 
     @Test
@@ -22,26 +22,34 @@ class AccountTest {
 
     @Test
     void withdraw() {
+        account.subBalance(new BigDecimal(100));
+        assertEquals(new BigDecimal(9900), account.getBalance());
     }
 
     @Test
     void getBalance() {
+        assertEquals(new BigDecimal(10000), account.getBalance());
     }
 
     @Test
     void getAccount() {
+        assertEquals("12345678901234567890", account.getAccountNum());
     }
 
     @Test
     void getStatus() {
+        assertEquals(AccountStatus.Active, account.getStatus());
     }
 
     @Test
     void setStatus() {
+        account.setStatus(AccountStatus.Blocked);
+        assertEquals(AccountStatus.Blocked,account.getStatus());
     }
 
     @Test
     void testEquals() {
+
     }
 
     @Test
