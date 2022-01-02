@@ -18,7 +18,7 @@ public class DbCon {
             conn = DriverManager.getConnection(dbPath);
         }
         catch (SQLException | ClassNotFoundException throwables) {
-            System.out.println(throwables.getMessage());
+            System.out.println("No connection");
         }
         return conn;
     }
@@ -28,7 +28,7 @@ public class DbCon {
             try {
                 conn.close();
             } catch (SQLException throwables) {
-                System.out.println(throwables);
+                System.out.println("Connection error");
             }
         }
     }
